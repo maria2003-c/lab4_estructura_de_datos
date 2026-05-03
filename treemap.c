@@ -85,7 +85,36 @@ Pair * searchTreeMap(TreeMap * tree, void* key)
 // Para insertar un dato, primero debe realizar una búsqueda para encontrar donde debería ubicarse. 
 // Luego crear el nuevo nodo y enlazarlo. Si la clave del dato ya existe retorne sin hacer nada (recuerde que el mapa no permite claves repetidas).
 
-void insertTreeMap(TreeMap * tree, void* key, void * value) {
+void insertTreeMap(TreeMap * tree, void* key, void * value) 
+{
+    if (searchTreeMap(tree, key) != NULL) return;
+    
+    TreeNode * aux = tree-> root;
+    TreeNode * parent = NULL;
+
+    while(aux != NULL)
+        {
+            parent = aux;
+            if(tree->lower_than (key, aux->pair->key))
+            {
+                aux = aux->left;
+            }
+            else{
+                aux = aux->right;
+            }
+        }
+    TreeNode *newNode = createTreeNode(key, value);
+    newNode->parent = parent;
+
+    if(tree->lower_than(key, parent->pair->key))
+    {
+        parent->left = newNode;
+    }
+    else{
+        parent->right = newNode;
+    }
+
+    tree->current = newNode;
 
 }
 
