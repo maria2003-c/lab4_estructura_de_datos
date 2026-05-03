@@ -123,9 +123,11 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
 // Para obtener el nodo tiene que, a partir del nodo x, irse por la rama izquierda hasta llegar al final del subárbol. 
 // Si x no tiene hijo izquierdo se retorna el mismo nodo.
 
-TreeNode * minimum(TreeNode * x){
+TreeNode * minimum(TreeNode * x)
+{
+    while(x->left != NULL) x = x->left;
 
-    return NULL;
+    return x;
 }
 
 // 5.- Implemente la función void removeNode(TreeMap * tree, TreeNode* node). 
