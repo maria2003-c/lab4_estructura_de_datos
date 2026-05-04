@@ -138,8 +138,38 @@ TreeNode * minimum(TreeNode * x)
 //    - Nodo con dos hijos: Descienda al hijo derecho y obtenga el menor nodo del subárbol (con la función minimum). 
 // Reemplace los datos (key,value) de node con los del nodo "minimum". Elimine el nodo minimum (para hacerlo puede usar la misma función removeNode).
 
-void removeNode(TreeMap * tree, TreeNode* node) {
+void removeNode(TreeMap * tree, TreeNode* node) 
+{
+    //caso 1 : sin hijos
+    if(node->left == NULL && node->right == NULL)
+    {
+        if(node->parent == NULL)tree->root = NULL;
+        else if (node->parent->left == node) node->parent->left = NULL;
+        else node->parent->right = NULL;
+        free(node);
+    }
+    //caso 2 : dos hijos
+    else if (node->left != NULL && node->right != NULL)
+    {
+        TreeNode* minNode = minimum(node->right);
+        node->pair->key = minNode->pair->value;
+        removeNode(tree, minNode);
+    }
 
+    //caso 3 : un hijo
+    else{
+        TreeNode* child;
+
+        if(node->left != NULL) child = node->left;
+        else child = node->right;
+    }
+    child->parent = node->parent;
+
+    if(mode->parent == NULL)tree->root = child;
+    else if(node->parent->left == node)node->parent->left = child;
+    else node->parent->right = child;
+    free(node);
+    
 }
 
 void eraseTreeMap(TreeMap * tree, void* key){
