@@ -35,3 +35,18 @@ treemap.c:168:8: error: ‘mode’ undeclared (first use in this function); did 
       |        node
 cc1: all warnings being treated as errors
 2977adf
+Mon May  4 02:21:27 AM UTC 2026: 
+ treemap.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+Compilation failed
+In file included from test.c:4:
+treemap.c: In function ‘removeNode’:
+treemap.c:162:19: error: variable ‘child’ set but not used [-Werror=unused-but-set-variable]
+  162 |         TreeNode* child;
+      |                   ^~~~~
+treemap.c:167:5: error: ‘child’ undeclared (first use in this function)
+  167 |     child->parent = node->parent;
+      |     ^~~~~
+treemap.c:167:5: note: each undeclared identifier is reported only once for each function it appears in
+cc1: all warnings being treated as errors
+0dbfc2c
