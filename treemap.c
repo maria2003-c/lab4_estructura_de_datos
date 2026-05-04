@@ -197,8 +197,26 @@ Pair * firstTreeMap(TreeMap * tree)
 
 Pair * nextTreeMap(TreeMap * tree) 
 {
+    if(tree->current == NULL)return NULL;
+
+    if(tree->current->right != NULL)
+    {
+        tree->current = minimum(tree->current->right);
+        return tree->current->pair;
+    }
+
+    TreeNode* padre = tree->current->parent;
+
+    while(padre != NULL && tree->current == padre->right)
+        {
+            tree->current = padre;
+            padre = padre->parent;
+        }
+    tree->current = padre;
+
+    if(padre != NULL) return padre->pair;
+    else return NULL;
     
-    return NULL;
 }
 
 // 7. La función Pair* upperBound(TreeMap* tree, void* key) retorna el Pair con clave igual a key. 
